@@ -1,0 +1,52 @@
+#include <stdio.h>
+
+int main() {
+    double income, tax = 0;
+    int salaried;
+
+    printf("Enter your annual income (₹): ");
+    scanf("%lf", &income);
+
+    printf("Are you a salaried individual? (1 for Yes, 0 for No): ");
+    scanf("%d", &salaried);
+
+    // Apply standard deduction if salaried
+    if (salaried == 1) {
+        income -= 75000;
+        if (income < 0) {
+            income = 0;
+        }
+    }
+
+    // Flat-rate taxation based on slab
+    if (income <= 400000) {
+        tax = 0;
+    }
+    else if (income <= 800000) {
+        tax = income * 0.05;
+    }
+    else if (income <= 1200000) {
+        tax = income * 0.10;
+    }
+    else if (income <= 1600000) {
+        tax = income * 0.15;
+    }
+    else if (income <= 2000000) {
+        tax = income * 0.20;
+    }
+    else if (income <= 2400000) {
+        tax = income * 0.25;
+    }
+    else {
+        tax = income * 0.30;
+    }
+
+    double effectiveRate = (income > 0) ? (tax / income) * 100 : 0;
+
+    printf("\n--- Tax Calculation Result ---\n");
+    printf("Taxable Income: ₹%.2lf\n", income);
+    printf("Tax Payable: ₹%.2lf\n", tax);
+    printf("Effective Tax Rate: %.2lf%%\n", effectiveRate);
+
+    return 0;
+}
